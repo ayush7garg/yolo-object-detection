@@ -19,7 +19,7 @@ cap = cv2.VideoCapture("1234.mp4")
 while(cap.isOpened()):
     _,img = cap.read()
     # img = gray(img)
-    img = cv2.resize(img, None, fx=0.4, fy=0.4)
+    # img = cv2.resize(img, None, fx=0.4, fy=0.4)
     height, width, channels = img.shape
 	# Detecting objects
     blob = cv2.dnn.blobFromImage(img, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
