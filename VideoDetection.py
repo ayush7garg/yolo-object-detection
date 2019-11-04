@@ -5,6 +5,8 @@ def gray(image):
     gray = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)#cvtColor converts an image from one color space to another
     return gray
 
+# Define the codec and create VideoWriter object
+
 # Load Yolo
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
 classes = []
@@ -19,7 +21,10 @@ cap = cv2.VideoCapture("1234.mp4")
 while(cap.isOpened()):
     _,img = cap.read()
     # img = gray(img)
-    # img = cv2.resize(img, None, fx=0.4, fy=0.4)
+    # img = cv2.resize(img, None, fx=1, fy=1)
+    height = 0
+    widht = 0
+    i=0
     height, width, channels = img.shape
 	# Detecting objects
     blob = cv2.dnn.blobFromImage(img, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
@@ -60,8 +65,8 @@ while(cap.isOpened()):
             color = colors[i]
             cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
             cv2.putText(img, label, (x, y + 30), font, 3, color, 3)
-
-    cv2.imshow("Image", img)
+    
+    cv2.imshow("Objects Detected", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     cv2.waitKey(1)
